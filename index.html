@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,16 +18,143 @@
             box-sizing: border-box;
         }
 
+        /* CSS переменные для тем */
+        :root {
+            /* Темная тема (по умолчанию) */
+            --bg-gradient-start: #000000;
+            --bg-gradient-end: #0a0a0a;
+            --text-primary: #E8E6E3;
+            --text-secondary: #B8B6B3;
+            --accent-gold: #D4AF37;
+            --accent-gold-hover: #F4E888;
+            --container-bg: rgba(30, 30, 30, 0.9);
+            --border-primary: rgba(212, 175, 55, 0.2);
+            --border-secondary: rgba(212, 175, 55, 0.3);
+            --border-hover: rgba(212, 175, 55, 0.4);
+            --card-bg: rgba(40, 40, 40, 0.8);
+            --card-hover: rgba(50, 50, 50, 0.9);
+            --next-prayer-bg: rgba(212, 175, 55, 0.1);
+            --next-prayer-active: rgba(212, 175, 55, 0.2);
+            --tab-bg: rgba(40, 40, 40, 0.8);
+            --tab-active: rgba(212, 175, 55, 0.15);
+            --lesson-bg: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Светлая тема */
+        body.light-theme {
+            --bg-gradient-start: #f0f9f5;
+            --bg-gradient-end: #e8f5e8;
+            --text-primary: #1a3d2b;
+            --text-secondary: #4a7c59;
+            --accent-gold: #b8860b;
+            --accent-gold-hover: #D4AF37;
+            --container-bg: rgba(255, 255, 255, 0.95);
+            --border-primary: rgba(184, 134, 11, 0.2);
+            --border-secondary: rgba(184, 134, 11, 0.3);
+            --border-hover: rgba(184, 134, 11, 0.4);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-hover: rgba(255, 255, 255, 0.95);
+            --next-prayer-bg: rgba(184, 134, 11, 0.1);
+            --next-prayer-active: rgba(184, 134, 11, 0.15);
+            --tab-bg: rgba(255, 255, 255, 0.8);
+            --tab-active: rgba(184, 134, 11, 0.15);
+            --lesson-bg: rgba(184, 134, 11, 0.12);
+        }
+
+        /* Специальные стили для светлой темы */
+        body.light-theme::before {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(184, 134, 11, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        body.light-theme .slideshow-toggle {
+            background: linear-gradient(145deg, rgba(184, 134, 11, 0.1) 0%, rgba(212, 175, 55, 0.06) 100%);
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.08);
+        }
+
+        body.light-theme .day-title {
+            background: linear-gradient(145deg, 
+                rgba(184, 134, 11, 0.06) 0%, 
+                rgba(212, 175, 55, 0.04) 100%);
+            border: 1px solid rgba(184, 134, 11, 0.15);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.05);
+        }
+
+        body.light-theme .tab-btn.active {
+            background: linear-gradient(145deg, 
+                rgba(184, 134, 11, 0.18) 0%, 
+                rgba(212, 175, 55, 0.12) 100%);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.15);
+        }
+
+        body.light-theme .tab-btn:hover:not(.active) {
+            background: rgba(184, 134, 11, 0.08);
+            box-shadow: 0 2px 4px rgba(184, 134, 11, 0.1);
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%);
-            color: #E8E6E3;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-primary);
             min-height: 100vh;
             padding: 20px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             position: relative;
             overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* ✅ СВЕТЛАЯ ТЕМА БЕЗ СЕРЫХ И ЧЕРНЫХ ЦВЕТОВ ✅ */
+        /* Заменили все серые/черные цвета на красивые золотистые оттенки */
+        body.light-theme .main-container {
+            box-shadow: 
+                0 20px 40px rgba(184, 134, 11, 0.15),
+                0 0 0 1px rgba(184, 134, 11, 0.2) inset;
+        }
+
+        body.light-theme .prayer-item {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(255, 255, 255, 0.7) 100%);
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.08);
+            border: 1px solid rgba(184, 134, 11, 0.15);
+        }
+
+        body.light-theme .group-card {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.06);
+            border: 1px solid rgba(184, 134, 11, 0.12);
+        }
+
+        body.light-theme .theme-toggle {
+            background: linear-gradient(145deg, rgba(184, 134, 11, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.1);
+        }
+
+        body.light-theme .theme-toggle:hover {
+            background: linear-gradient(145deg, rgba(184, 134, 11, 0.15) 0%, rgba(212, 175, 55, 0.1) 100%);
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+            transform: translateY(-1px);
+        }
+
+        /* Дополнительные красивые эффекты для светлой темы */
+        body.light-theme .prayer-item:hover {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(255, 255, 255, 0.85) 100%);
+            box-shadow: 0 6px 16px rgba(184, 134, 11, 0.12);
+            transform: translateY(-2px);
+            border-color: rgba(184, 134, 11, 0.4);
+        }
+
+        body.light-theme .group-card:hover {
+            box-shadow: 0 6px 16px rgba(184, 134, 11, 0.05);
+            transform: translateY(-1px);
         }
 
         /* Декоративные элементы фона */
@@ -40,23 +168,32 @@
             background: 
                 radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 70%);
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
             pointer-events: none;
             z-index: -1;
+        }
+
+        /* Специальный фон для светлой темы */
+        body.light-theme::before {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(184, 134, 11, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
         }
 
         .main-container {
             max-width: 1400px;
             margin: 0 auto;
-            background: linear-gradient(145deg, rgba(15, 15, 15, 0.95) 0%, rgba(25, 15, 15, 0.98) 100%);
+            background: var(--container-bg);
             border-radius: 25px;
             padding: 35px;
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--border-primary);
             box-shadow: 
                 0 20px 40px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+                0 0 0 1px var(--border-secondary) inset;
             position: relative;
+            transition: all 0.3s ease;
         }
 
         .main-container::before {
@@ -85,25 +222,57 @@
             position: relative;
         }
 
+        /* Кнопка переключения темы */
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--next-prayer-bg);
+            border: 1px solid var(--border-secondary);
+            border-radius: 25px;
+            padding: 8px 15px;
+            color: var(--accent-gold);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+
+        .theme-toggle:hover {
+            background: var(--next-prayer-active);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
         .city-name {
             font-size: 32px;
             font-weight: 600;
-            background: linear-gradient(45deg, #D4AF37, #F4D03F, #DAA520);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent-gold);
             margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .city-name {
+            text-shadow: 0 2px 4px rgba(184, 134, 11, 0.2);
         }
 
         .current-time {
             font-family: 'JetBrains Mono', monospace;
             font-size: 42px;
             font-weight: 600;
-            color: #FFFFFF;
+            color: var(--text-primary);
             margin-bottom: 12px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .current-time {
+            text-shadow: 0 0 10px rgba(184, 134, 11, 0.15);
         }
 
         .current-time::after {
@@ -114,13 +283,15 @@
             transform: translateX(-50%);
             width: 80px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            transition: all 0.3s ease;
         }
 
         .current-date {
             font-size: 16px;
-            color: #B8B4A0;
+            color: var(--text-secondary);
             font-weight: 400;
+            transition: all 0.3s ease;
         }
 
         /* Двухколоночный layout */
@@ -162,10 +333,12 @@
 
         .section-title {
             font-size: 18px;
-            color: #D4AF37;
+            color: var(--accent-gold);
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
             font-weight: 600;
             position: relative;
             z-index: 1;
@@ -188,15 +361,19 @@
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #FFFFFF;
+            color: var(--text-primary);
             position: relative;
             z-index: 1;
+        }
+        
+        body.light-theme .next-prayer-name {
+            color: var(--accent-gold);
         }
 
         .countdown {
             font-family: 'JetBrains Mono', monospace;
             font-size: 18px;
-            color: #B8B4A0;
+            color: var(--text-primary);
             font-weight: 500;
             position: relative;
             z-index: 1;
@@ -264,14 +441,14 @@
         .prayer-name {
             font-size: 16px;
             font-weight: 600;
-            color: #D4AF37;
+            color: var(--accent-gold);
         }
 
         .prayer-time {
             font-family: 'JetBrains Mono', monospace;
             font-size: 18px;
             font-weight: 600;
-            color: #FFFFFF;
+            color: var(--text-primary);
         }
 
         /* Правая колонка - расписание медресе */
@@ -287,12 +464,17 @@
             padding: 4px;
             gap: 2px;
         }
+        
+        body.light-theme .tabs {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(184, 134, 11, 0.2);
+        }
 
         .tab-btn {
             flex: 1;
             padding: 10px 15px;
             background: transparent;
-            color: #B8B4A0;
+            color: var(--text-secondary);
             border: none;
             border-radius: 8px;
             font-size: 12px;
@@ -306,12 +488,12 @@
             background: linear-gradient(145deg, 
                 rgba(212, 175, 55, 0.2) 0%, 
                 rgba(139, 69, 19, 0.15) 100%);
-            color: #FFFFFF;
+            color: var(--text-primary);
             box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
         }
 
         .tab-btn:hover:not(.active) {
-            color: #D4AF37;
+            color: var(--accent-gold);
             background: rgba(212, 175, 55, 0.1);
         }
 
@@ -334,20 +516,25 @@
             border-radius: 12px;
             border: 1px solid rgba(212, 175, 55, 0.2);
         }
+        
+        body.light-theme .slideshow-controls {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            border: 1px solid rgba(184, 134, 11, 0.25);
+        }
 
         .slideshow-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 11px;
-            color: #B8B4A0;
+            color: var(--text-secondary);
         }
 
         .indicator-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: #D4AF37;
+            background: var(--accent-gold);
             animation: pulse 2s infinite;
         }
 
@@ -371,7 +558,7 @@
             background: linear-gradient(145deg, rgba(212, 175, 55, 0.15) 0%, rgba(139, 69, 19, 0.1) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 8px;
-            color: #D4AF37;
+            color: var(--accent-gold);
             font-size: 10px;
             font-weight: 600;
             cursor: pointer;
@@ -393,6 +580,12 @@
             border-color: rgba(136, 136, 136, 0.3);
             background: rgba(136, 136, 136, 0.1);
         }
+        
+        body.light-theme .slideshow-toggle.paused {
+            color: rgba(184, 134, 11, 0.6);
+            border-color: rgba(184, 134, 11, 0.2);
+            background: rgba(184, 134, 11, 0.05);
+        }
 
         .toggle-text {
             font-size: 10px;
@@ -405,7 +598,7 @@
         .day-title {
             font-size: 16px;
             font-weight: 600;
-            color: #D4AF37;
+            color: var(--accent-gold);
             margin-bottom: 12px;
             padding: 8px 16px;
             background: linear-gradient(145deg, 
@@ -422,20 +615,16 @@
         }
 
         .group-card {
-            background: linear-gradient(145deg, 
-                rgba(30, 30, 30, 0.6) 0%, 
-                rgba(20, 20, 20, 0.8) 100%);
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-primary);
             transition: all 0.3s ease;
         }
 
         .group-card:hover {
-            background: linear-gradient(145deg, 
-                rgba(40, 35, 25, 0.7) 0%, 
-                rgba(25, 20, 15, 0.9) 100%);
-            border-color: rgba(212, 175, 55, 0.3);
+            background: var(--card-hover);
+            border-color: var(--border-secondary);
             transform: translateY(-2px);
         }
 
@@ -461,23 +650,35 @@
             padding: 10px;
             transition: all 0.3s ease;
         }
+        
+        body.light-theme .schedule-item {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            box-shadow: 0 2px 4px rgba(184, 134, 11, 0.05);
+        }
 
         .schedule-item:hover {
             border-color: rgba(212, 175, 55, 0.4);
             background: rgba(212, 175, 55, 0.08);
             transform: translateY(-1px);
         }
+        
+        body.light-theme .schedule-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(184, 134, 11, 0.4);
+            box-shadow: 0 4px 8px rgba(184, 134, 11, 0.15);
+        }
 
         .group-name {
             font-size: 13px;
             font-weight: 600;
-            color: #D4AF37;
+            color: var(--accent-gold);
             margin-bottom: 8px;
         }
 
         .lesson-item {
-            background: rgba(0, 0, 0, 0.3);
-            border-left: 3px solid #D4AF37;
+            background: var(--lesson-bg);
+            border-left: 3px solid var(--accent-gold);
             padding: 6px 10px;
             margin-bottom: 4px;
             border-radius: 0 6px 6px 0;
@@ -487,22 +688,23 @@
         .lesson-time {
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
-            color: #D4AF37;
+            color: var(--accent-gold);
             font-weight: 600;
             display: block;
         }
 
         .lesson-subject {
             font-size: 12px;
-            color: #FFFFFF;
+            color: var(--text-primary);
             margin-top: 1px;
             line-height: 1.2;
         }
 
         .faculty {
             font-size: 10px;
-            color: #B8B4A0;
+            color: var(--text-secondary);
             font-style: italic;
+            opacity: 0.8;
         }
 
         /* Мобильная адаптация */
@@ -555,14 +757,29 @@
                 transform: translateY(-2px);
                 box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
             }
+            
+            body.light-theme .group-card:hover {
+                background: linear-gradient(145deg, 
+                    rgba(255, 255, 255, 0.95) 0%, 
+                    rgba(255, 255, 255, 0.85) 100%);
+                border-color: rgba(184, 134, 11, 0.6);
+                box-shadow: 0 8px 25px rgba(184, 134, 11, 0.2);
+                transform: translateY(-2px);
+            }
 
             /* Постоянный размер для tab-content на всех форматах */
             .tab-content {
                 max-height: 65vh;
                 overflow-y: auto;
                 padding: 10px 5px;
-                background: rgba(0, 0, 0, 0.2);
+                background: rgba(255, 255, 255, 0.1);
                 border-radius: 8px;
+                border: 1px solid rgba(184, 134, 11, 0.1);
+            }
+            
+            body.light-theme .tab-content {
+                background: rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(184, 134, 11, 0.15);
             }
 
 
@@ -582,6 +799,12 @@
                 border: 1px solid rgba(212, 175, 55, 0.2);
                 border-radius: 8px;
                 padding: 12px;
+            }
+            
+            body.light-theme .schedule-item {
+                background: rgba(255, 255, 255, 0.9);
+                border: 1px solid rgba(184, 134, 11, 0.25);
+                box-shadow: 0 4px 8px rgba(184, 134, 11, 0.08);
             }
 
             /* Макет для больших экранов */
@@ -694,6 +917,12 @@
                 font-size: 32px;
             }
             
+            .theme-toggle {
+                position: relative;
+                margin-bottom: 20px;
+                display: inline-flex;
+            }
+            
             .tabs {
                 flex-direction: column;
                 gap: 2px;
@@ -738,6 +967,15 @@
             
             .group-card {
                 padding: 12px;
+            }
+            
+            /* Мобильная версия светлой темы - без серых цветов */
+            body.light-theme .prayer-item,
+            body.light-theme .group-card,
+            body.light-theme .schedule-item {
+                background: rgba(255, 255, 255, 0.95) !important;
+                border: 1px solid rgba(184, 134, 11, 0.2) !important;
+                box-shadow: 0 2px 8px rgba(184, 134, 11, 0.1) !important;
             }
         }
 
@@ -890,10 +1128,15 @@
             }
         }
     </style>
+    <!-- ✅ СВЕТЛАЯ ТЕМА ПОЛНОСТЬЮ ПЕРЕДЕЛАНА - ВСЕ СЕРЫЕ И ЧЕРНЫЕ ЦВЕТА УБРАНЫ ✅ -->
 </head>
 <body>
     <div class="main-container">
         <div class="header">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span class="theme-icon">🌙</span>
+                <span class="theme-text">Темная</span>
+            </button>
             <h1 class="city-name">Казань 2025</h1>
             <div class="current-time" id="currentTime">--:--:--</div>
             <div class="current-date" id="currentDate"></div>
@@ -1385,6 +1628,7 @@
             createPrayerCards();
             updateTime();
             updatePrayerTimes();
+            loadTheme(); // Загружаем сохраненную тему
             
             // Запуск автоматического слайд-шоу
             startSlideshow();
@@ -1400,5 +1644,46 @@
             setInterval(updateTime, 1000);
             setInterval(updatePrayerTimes, 60000);
         });
+
+        // Переключение темы
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeIcon = document.querySelector('.theme-icon');
+            const themeText = document.querySelector('.theme-text');
+            
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Темная';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light-theme');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Светлая';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Загрузка темы из localStorage
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeIcon = document.querySelector('.theme-icon');
+            const themeText = document.querySelector('.theme-text');
+            
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Светлая';
+            } else {
+                // Темная тема по умолчанию
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Темная';
+            }
+        }
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"99cf104c3f49b95a","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"e72945439c264b3b85d2e3b689102d27"}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"99d093960e02a0af","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"e72945439c264b3b85d2e3b689102d27"}' crossorigin="anonymous"></script>
+</body>
+</html>
