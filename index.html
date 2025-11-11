@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mac-adaptations.css">
     <style>
         * {
             margin: 0;
@@ -276,8 +277,6 @@
         /* Правая колонка - расписание медресе */
         .schedule-section {
             position: relative;
-            width: 100%;
-            box-sizing: border-box;
         }
 
         .tabs {
@@ -322,8 +321,6 @@
 
         .tab-content.active {
             display: block;
-            width: 100%;
-            box-sizing: border-box;
         }
 
         /* Стили для управления слайд-шоу */
@@ -420,7 +417,8 @@
 
         .groups-container {
             display: grid;
-            gap: 12px;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
 
         .group-card {
@@ -428,7 +426,7 @@
                 rgba(30, 30, 30, 0.6) 0%, 
                 rgba(20, 20, 20, 0.8) 100%);
             border-radius: 12px;
-            padding: 15px;
+            padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
@@ -441,38 +439,68 @@
             transform: translateY(-2px);
         }
 
+
+
+        /* Grid layout с фиксированной высотой для всех расписаний */
+        .schedule-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            align-content: start;
+            min-height: 340px; /* Фиксированная минимальная высота для всех расписаний */
+        }
+
+        .schedule-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 12px;
+            break-inside: avoid;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 6px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(212, 175, 55, 0.08);
+            transform: translateY(-1px);
+        }
+
         .group-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #D4AF37;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .lesson-item {
             background: rgba(0, 0, 0, 0.3);
             border-left: 3px solid #D4AF37;
-            padding: 8px 12px;
-            margin-bottom: 6px;
+            padding: 6px 10px;
+            margin-bottom: 4px;
             border-radius: 0 6px 6px 0;
             position: relative;
         }
 
         .lesson-time {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 11px;
             color: #D4AF37;
             font-weight: 600;
             display: block;
         }
 
         .lesson-subject {
-            font-size: 13px;
+            font-size: 12px;
             color: #FFFFFF;
-            margin-top: 2px;
+            margin-top: 1px;
+            line-height: 1.2;
         }
 
         .faculty {
-            font-size: 11px;
+            font-size: 10px;
             color: #B8B4A0;
             font-style: italic;
         }
@@ -494,6 +522,157 @@
             
             .current-time {
                 font-size: 36px;
+            }
+        }
+
+        /* Mac адаптация с Grid системой */
+        @media (min-width: 1024px) {
+            /* Обновляем groups-container для Mac */
+            .groups-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 15px;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 0 5px;
+            }
+
+            /* Одинаковый размер карточек групп */
+            .group-card {
+                border: 2px solid rgba(212, 175, 55, 0.3);
+                backdrop-filter: blur(5px);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                transition: all 0.3s ease;
+            }
+
+            .group-card:hover {
+                border-color: rgba(212, 175, 55, 0.6);
+                background: linear-gradient(145deg, 
+                    rgba(40, 35, 25, 0.8) 0%, 
+                    rgba(25, 20, 15, 0.95) 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+            }
+
+            /* Постоянный размер для tab-content на всех форматах */
+            .tab-content {
+                max-height: 65vh;
+                overflow-y: auto;
+                padding: 10px 5px;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+            }
+
+
+
+            /* Улучшенный Grid layout для больших экранов */
+            .schedule-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                align-content: start;
+                min-height: 360px;
+            }
+
+            .schedule-item {
+                margin-bottom: 15px;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(212, 175, 55, 0.2);
+                border-radius: 8px;
+                padding: 12px;
+            }
+
+            /* Макет для больших экранов */
+            .main-container {
+                max-width: 1600px;
+                padding: 40px;
+            }
+
+            .header {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+
+            .tabs {
+                gap: 3px;
+            }
+
+            .tab-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+                border-radius: 8px;
+                min-width: 120px;
+            }
+
+            .tab-btn.active {
+                background: linear-gradient(145deg, 
+                    rgba(212, 175, 55, 0.2) 0%, 
+                    rgba(212, 175, 55, 0.1) 100%);
+                border: 2px solid rgba(212, 175, 55, 0.4);
+            }
+        }
+
+        /* Специальные адаптации для Mac устройств */
+        @media (min-width: 1200px) and (max-width: 1440px) {
+            /* MacBook Pro 13" и 16" */
+            .groups-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 18px;
+            }
+
+            .group-card {
+                padding: 18px;
+            }
+        }
+
+        @media (min-width: 1441px) {
+            /* iMac 24" и большие экраны */
+            .groups-container {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 20px;
+                max-width: 1800px;
+            }
+
+            .group-card {
+                padding: 20px;
+            }
+
+            /* Максимальные экраны - Grid с 3 колонками */
+            .schedule-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+                align-content: start;
+                min-height: 380px;
+            }
+
+            .main-container {
+                max-width: 2000px;
+                padding: 50px;
+            }
+        }
+
+        /* Safari оптимизация */
+        @supports (-webkit-touch-callout: none) {
+            .group-card {
+                -webkit-backdrop-filter: blur(10px);
+            }
+            
+            .tab-content::-webkit-scrollbar {
+                -webkit-appearance: none;
+            }
+        }
+
+        /* Retina поддержка */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .group-card {
+                border-width: 1px;
+            }
+            
+            .tab-content::-webkit-scrollbar {
+                width: 6px;
             }
         }
 
@@ -523,6 +702,25 @@
             .tab-btn {
                 font-size: 11px;
                 padding: 8px 12px;
+            }
+            
+            /* Адаптация Grid для мобильных */
+            .schedule-container {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0;
+                align-content: start;
+                min-height: 240px;
+            }
+            
+            .schedule-item {
+                margin-bottom: 8px;
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .group-card {
+                padding: 12px;
             }
         }
 
@@ -691,288 +889,6 @@
                 font-size: 32px;
             }
         }
-
-        /* Кнопка полноэкранного режима */
-        .fullscreen-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 16px;
-            background: linear-gradient(145deg, rgba(212, 175, 55, 0.15) 0%, rgba(139, 69, 19, 0.1) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 10px;
-            color: #D4AF37;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .fullscreen-btn:hover {
-            background: linear-gradient(145deg, rgba(212, 175, 55, 0.25) 0%, rgba(139, 69, 19, 0.2) 100%);
-            border-color: rgba(212, 175, 55, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Индикатор полноэкранного режима */
-        .fullscreen-indicator {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 8px 12px;
-            background: rgba(76, 175, 80, 0.8);
-            color: #fff;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(76, 175, 80, 0.5);
-        }
-
-        .fullscreen-indicator.hidden {
-            display: none;
-        }
-
-        /* Адаптация под широкие экраны */
-        
-        /* Ultra-wide экраны (21:9, 32:9 соотношения) */
-        @media screen and (aspect-ratio > 2.5) {
-            body {
-                padding: 15px 30px;
-            }
-            
-            .main-container {
-                max-width: 95vw;
-                display: grid;
-                grid-template-columns: 1fr 1.2fr;
-                gap: 30px;
-                align-items: start;
-            }
-            
-            .left-section {
-                min-width: 400px;
-            }
-            
-            .right-section {
-                min-width: 500px;
-            }
-            
-            .clock-container {
-                font-size: clamp(3rem, 6vw, 8rem);
-            }
-            
-            .date-container {
-                font-size: clamp(1.2rem, 2.5vw, 2rem);
-            }
-            
-            .prayer-section h2 {
-                font-size: clamp(1.5rem, 3vw, 2.5rem);
-            }
-            
-            .prayer-item {
-                font-size: clamp(1rem, 2vw, 1.5rem);
-            }
-            
-            .schedule-section {
-                max-width: 100%;
-                overflow: hidden;
-            }
-            
-            .schedule-tabs {
-                font-size: clamp(1rem, 1.8vw, 1.4rem);
-                flex-wrap: wrap;
-            }
-            
-            .schedule-content {
-                font-size: clamp(1.1rem, 2vw, 1.6rem);
-                line-height: 1.6;
-                max-height: 70vh;
-                overflow-y: auto;
-                scrollbar-width: thin;
-                scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
-            }
-            
-            .day-section {
-                margin-bottom: 15px;
-            }
-            
-            .groups-container {
-                display: grid;
-                gap: 10px;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
-        
-        /* Очень широкие экраны (2560px+) */
-        @media screen and (min-width: 2560px) {
-            .main-container {
-                max-width: 2400px;
-                grid-template-columns: 1fr 1.5fr;
-                gap: 40px;
-            }
-            
-            .clock-container {
-                font-size: clamp(4rem, 7vw, 10rem);
-            }
-            
-            .date-container {
-                font-size: clamp(1.4rem, 2.8vw, 2.5rem);
-            }
-            
-            .prayer-section h2 {
-                font-size: clamp(1.8rem, 3.5vw, 3rem);
-            }
-            
-            .prayer-item {
-                font-size: clamp(1.2rem, 2.2vw, 1.8rem);
-                padding: 20px;
-            }
-            
-            .schedule-section {
-                max-width: 100%;
-                overflow: hidden;
-            }
-            
-            .schedule-tabs {
-                font-size: clamp(1.2rem, 2vw, 1.6rem);
-                flex-wrap: wrap;
-            }
-            
-            .schedule-content {
-                font-size: clamp(1.3rem, 2.2vw, 1.8rem);
-                line-height: 1.8;
-                max-height: 75vh;
-                overflow-y: auto;
-                scrollbar-width: thin;
-                scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
-            }
-            
-            .groups-container {
-                display: grid;
-                gap: 12px;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-        }
-        
-        /* Сверхширокоформатные экраны (32:9+) */
-        @media screen and (aspect-ratio > 3.5) {
-            body {
-                padding: 10px 20px;
-            }
-            
-            .main-container {
-                max-width: 98vw;
-                grid-template-columns: 1fr 1fr 1.2fr;
-                gap: 20px;
-            }
-            
-            .left-section {
-                min-width: 300px;
-            }
-            
-            .right-section {
-                min-width: 400px;
-            }
-            
-            .schedule-section {
-                max-width: 100%;
-                overflow: hidden;
-            }
-            
-            .fullscreen-btn {
-                top: 15px;
-                right: 15px;
-                font-size: 0.9rem;
-                padding: 10px 14px;
-            }
-            
-            .fullscreen-indicator {
-                top: 15px;
-                left: 15px;
-                font-size: 0.9rem;
-                padding: 8px 12px;
-            }
-        }
-        
-        /* Горизонтальные планшеты и маленькие ultra-wide */
-        @media screen and (aspect-ratio > 2 and aspect-ratio <= 2.5) and (min-width: 1200px) {
-            .main-container {
-                max-width: 90vw;
-                display: grid;
-                grid-template-columns: 1fr 1.1fr;
-                gap: 25px;
-            }
-            
-            .clock-container {
-                font-size: clamp(2.5rem, 5vw, 6rem);
-            }
-            
-            .prayer-item {
-                font-size: clamp(0.9rem, 1.8vw, 1.3rem);
-            }
-            
-            /* Улучшенная адаптация расписания для широких экранов */
-            .schedule-section {
-                max-width: 100%;
-                overflow: hidden;
-            }
-            
-            .schedule-content {
-                max-height: 65vh;
-                overflow-y: auto;
-                scrollbar-width: thin;
-                scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
-            }
-            
-            .groups-container {
-                display: grid;
-                gap: 12px;
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            }
-        }
-
-        /* ИСПРАВЛЕНИЕ ПОЛНОЭКРАННОГО РЕЖИМА - убираем белый фон */
-        
-        /* Специальные стили для полноэкранного режима */
-        :fullscreen body {
-            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
-            background-attachment: fixed !important;
-        }
-        
-        :fullscreen {
-            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
-        }
-        
-        html:fullscreen {
-            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
-        }
-        
-        /* Fallback для старых браузеров */
-        :-webkit-full-screen body {
-            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
-            background-attachment: fixed !important;
-        }
-        
-        :-moz-full-screen body {
-            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
-        }
-        
-        /* Принудительное применение фона ко всем элементам */
-        :fullscreen * {
-            background-color: inherit;
-        }
-        
-        :fullscreen body::before {
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 70%);
-        }
     </style>
 </head>
 <body>
@@ -1051,16 +967,17 @@
                                 </div>
                             </div>
                             <div class="group-card">
-                                <div class="group-name">Мальчики 7-10 лет (1 группа)</div>
+                                <div class="group-name">Мальчики 7-10 лет</div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">17:10 - 18:10</span>
+                                    <span class="lesson-time">17:00 - 17:50</span>
                                     <div class="lesson-subject">Модуль «Основы Ислама»</div>
                                 </div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">16:00 - 17:00</span>
-                                    <div class="lesson-subject">Обучение чтению Корана и заучивание</div>
+                                    <span class="lesson-time">18:00 - 18:50</span>
+                                    <div class="lesson-subject">Обучение чтению Корана</div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -1094,35 +1011,20 @@
                                 </div>
                             </div>
                             <div class="group-card">
-                                <div class="group-name">Мальчики 7-10 лет (1 группа)</div>
+                                <div class="group-name">Девочки 7-10 лет</div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">17:10 - 18:10</span>
-                                    <div class="lesson-subject">Модуль «Нравственное воспитание»</div>
-                                </div>
-                                <div class="lesson-item">
-                                    <span class="lesson-time">16:00 - 17:00</span>
-                                    <div class="lesson-subject">Обучение чтению Корана и заучивание</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="day-section">
-                        <h3 class="day-title">Воскресенье</h3>
-                        <div class="groups-container">
-                            <div class="group-card">
-                                <div class="group-name">Мальчики 7-10 лет (2 группа)</div>
-                                <div class="lesson-item">
-                                    <span class="lesson-time">9:50 - 10:50</span>
+                                    <span class="lesson-time">17:00 - 17:50</span>
                                     <div class="lesson-subject">Модуль «Основы Ислама»</div>
                                 </div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">11:00 - 12:00</span>
-                                    <div class="lesson-subject">Модуль «Нравственное воспитание»</div>
+                                    <span class="lesson-time">18:00 - 18:50</span>
+                                    <div class="lesson-subject">Обучение чтению Корана</div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Женское расписание -->
@@ -1157,16 +1059,17 @@
                                 </div>
                             </div>
                             <div class="group-card">
-                                <div class="group-name">Девочки 7-10 лет (группа 1)</div>
+                                <div class="group-name">Мальчики 7-10 лет</div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">17:10 - 18:10</span>
+                                    <span class="lesson-time">17:00 - 17:50</span>
                                     <div class="lesson-subject">Модуль «Основы Ислама»</div>
                                 </div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">16:00 - 17:00</span>
-                                    <div class="lesson-subject">Обучение чтению Корана и заучивание</div>
+                                    <span class="lesson-time">18:00 - 18:50</span>
+                                    <div class="lesson-subject">Обучение чтению Корана</div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -1200,35 +1103,21 @@
                                 </div>
                             </div>
                             <div class="group-card">
-                                <div class="group-name">Девочки 7-10 лет (группа 1)</div>
+                                <div class="group-name">Девочки 7-10 лет</div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">17:10 - 18:10</span>
-                                    <div class="lesson-subject">Модуль «Нравственное воспитание»</div>
-                                </div>
-                                <div class="lesson-item">
-                                    <span class="lesson-time">16:00 - 17:00</span>
-                                    <div class="lesson-subject">Обучение чтению Корана и заучивание</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="day-section">
-                        <h3 class="day-title">Воскресенье</h3>
-                        <div class="groups-container">
-                            <div class="group-card">
-                                <div class="group-name">Девочки 7-10 лет (группа 2)</div>
-                                <div class="lesson-item">
-                                    <span class="lesson-time">9:50 - 10:50</span>
+                                    <span class="lesson-time">17:00 - 17:50</span>
                                     <div class="lesson-subject">Модуль «Основы Ислама»</div>
                                 </div>
                                 <div class="lesson-item">
-                                    <span class="lesson-time">11:00 - 12:00</span>
-                                    <div class="lesson-subject">Модуль «Нравственное воспитание»</div>
+                                    <span class="lesson-time">18:00 - 18:50</span>
+                                    <div class="lesson-subject">Обучение чтению Корана</div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
+
                 </div>
 
                 <!-- Детское расписание -->
@@ -1258,21 +1147,23 @@
                                     <div class="lesson-subject">Модуль «Нравственное воспитание»</div>
                                 </div>
                             </div>
+                            <div class="group-card">
+                                <div class="group-name">Дети 5-7 лет (группа 3)</div>
+                                <div class="lesson-item">
+                                    <span class="lesson-time">9:50 - 10:50</span>
+                                    <div class="lesson-subject">Модуль «Основы Ислама»</div>
+                                </div>
+                                <div class="lesson-item">
+                                    <span class="lesson-time">11:00 - 12:00</span>
+                                    <div class="lesson-subject">Модуль «Нравственное воспитание»</div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Кнопка полноэкранного режима -->
-    <button class="fullscreen-btn" onclick="toggleFullscreen()">
-        🔲 Полный экран
-    </button>
-    
-    <!-- Индикатор полноэкранного режима -->
-    <div class="fullscreen-indicator hidden" id="fullscreenIndicator">
-        Полноэкранный режим активен
     </div>
 
     <script>
@@ -1489,112 +1380,8 @@
             }
         }
 
-        // Полноэкранный режим
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().then(() => {
-                    updateFullscreenIndicator();
-                    // Принудительное применение фона в полноэкранном режиме
-                    document.documentElement.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
-                    document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
-                    document.body.style.backgroundAttachment = 'fixed';
-                }).catch(err => {
-                    console.log('Ошибка входа в полноэкранный режим:', err);
-                });
-            } else {
-                document.exitFullscreen().then(() => {
-                    updateFullscreenIndicator();
-                    // Сброс фона при выходе из полноэкранного режима
-                    document.documentElement.style.background = '';
-                    document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
-                    document.body.style.backgroundAttachment = 'fixed';
-                });
-            }
-        }
-
-        function updateFullscreenIndicator() {
-            const indicator = document.getElementById('fullscreenIndicator');
-            const isFullscreen = !!document.fullscreenElement;
-            
-            if (isFullscreen) {
-                indicator.classList.remove('hidden');
-            } else {
-                indicator.classList.add('hidden');
-            }
-        }
-
-        // Автоматический полноэкранный режим через 3 секунды
-        setTimeout(() => {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log('Ошибка автоматического полноэкранного режима:', err);
-                });
-            }
-        }, 3000);
-
-        // Предотвращение выхода из полноэкранного режима
-        document.addEventListener('fullscreenchange', () => {
-            updateFullscreenIndicator();
-            
-            // Применяем правильный фон в любом состоянии
-            if (document.fullscreenElement) {
-                // В полноэкранном режиме
-                document.documentElement.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
-                document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
-                document.body.style.backgroundAttachment = 'fixed';
-            } else {
-                // В обычном режиме
-                document.documentElement.style.background = '';
-                document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
-                document.body.style.backgroundAttachment = 'fixed';
-            }
-            
-            // Если пользователь вышел из полноэкранного режима, пытаемся войти снова через 5 секунд
-            if (!document.fullscreenElement) {
-                setTimeout(() => {
-                    if (!document.fullscreenElement) {
-                        toggleFullscreen();
-                    }
-                }, 5000);
-            }
-        });
-
-        // Обработчик клавиатуры для управления
-        document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case 'Escape':
-                    // Разрешаем выход только при нажатии Escape
-                    if (document.fullscreenElement) {
-                        document.exitFullscreen();
-                    }
-                    break;
-                case 'f':
-                case 'F':
-                    e.preventDefault();
-                    toggleFullscreen();
-                    break;
-                case ' ':
-                    e.preventDefault();
-                    toggleSlideshow();
-                    break;
-                case 'ArrowLeft':
-                case 'ArrowRight':
-                    e.preventDefault();
-                    if (e.key === 'ArrowLeft') {
-                        // prevTab();
-                    } else {
-                        // nextTab();
-                    }
-                    break;
-            }
-        });
-
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            // Инициализация правильного фона
-            document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
-            document.body.style.backgroundAttachment = 'fixed';
-            
             createPrayerCards();
             updateTime();
             updatePrayerTimes();
@@ -1612,9 +1399,6 @@
             // Обновления времени
             setInterval(updateTime, 1000);
             setInterval(updatePrayerTimes, 60000);
-            
-            // Обновляем индикатор полноэкранного режима при загрузке
-            updateFullscreenIndicator();
         });
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"99cf104c3f49b95a","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"e72945439c264b3b85d2e3b689102d27"}' crossorigin="anonymous"></script>
