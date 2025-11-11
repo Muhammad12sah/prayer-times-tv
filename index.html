@@ -872,43 +872,68 @@
             }
 
             .group-card {
-                padding: 20px;
+                padding: 15px;
             }
 
             /* Максимальные экраны - Grid с 3 колонками */
             .schedule-container {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 25px;
+                gap: 20px;
                 align-content: start;
-                min-height: 380px;
+                min-height: 280px;
             }
 
             /* ТЕЛЕВИЗОРЫ - несколько колонок для контента */
             .content-grid {
-                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-                gap: 40px;
-                max-width: 2000px;
-                margin: 0 auto;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                max-width: none;
+                width: 100%;
             }
 
             .main-container {
-                max-width: 2000px;
-                padding: 50px;
+                max-width: none;
+                padding: 15px;
+                margin: 0;
+            }
+        }
+        
+        @media (min-width: 1441px) {
+            body {
+                padding: 15px;
             }
         }
         
         @media (min-width: 2000px) {
             /* Телевизоры Ultra HD и очень большие экраны */
+            body {
+                padding: 10px;
+            }
+            
             .content-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 50px;
-                max-width: 2400px;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 25px;
+                max-width: none;
+                width: 100%;
             }
             
             .main-container {
-                max-width: 2200px;
-                padding: 60px;
+                max-width: none;
+                padding: 15px;
+                margin: 0;
+            }
+        }
+        
+        @media (min-width: 1441px) {
+            .main-container {
+                padding: 20px;
+            }
+        }
+        
+        @media (min-width: 2000px) {
+            .main-container {
+                padding: 15px;
             }
         }
 
