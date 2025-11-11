@@ -276,6 +276,8 @@
         /* Правая колонка - расписание медресе */
         .schedule-section {
             position: relative;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .tabs {
@@ -320,6 +322,8 @@
 
         .tab-content.active {
             display: block;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         /* Стили для управления слайд-шоу */
@@ -687,6 +691,288 @@
                 font-size: 32px;
             }
         }
+
+        /* Кнопка полноэкранного режима */
+        .fullscreen-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 16px;
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.15) 0%, rgba(139, 69, 19, 0.1) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: #D4AF37;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .fullscreen-btn:hover {
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.25) 0%, rgba(139, 69, 19, 0.2) 100%);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Индикатор полноэкранного режима */
+        .fullscreen-indicator {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 8px 12px;
+            background: rgba(76, 175, 80, 0.8);
+            color: #fff;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .fullscreen-indicator.hidden {
+            display: none;
+        }
+
+        /* Адаптация под широкие экраны */
+        
+        /* Ultra-wide экраны (21:9, 32:9 соотношения) */
+        @media screen and (aspect-ratio > 2.5) {
+            body {
+                padding: 15px 30px;
+            }
+            
+            .main-container {
+                max-width: 95vw;
+                display: grid;
+                grid-template-columns: 1fr 1.2fr;
+                gap: 30px;
+                align-items: start;
+            }
+            
+            .left-section {
+                min-width: 400px;
+            }
+            
+            .right-section {
+                min-width: 500px;
+            }
+            
+            .clock-container {
+                font-size: clamp(3rem, 6vw, 8rem);
+            }
+            
+            .date-container {
+                font-size: clamp(1.2rem, 2.5vw, 2rem);
+            }
+            
+            .prayer-section h2 {
+                font-size: clamp(1.5rem, 3vw, 2.5rem);
+            }
+            
+            .prayer-item {
+                font-size: clamp(1rem, 2vw, 1.5rem);
+            }
+            
+            .schedule-section {
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .schedule-tabs {
+                font-size: clamp(1rem, 1.8vw, 1.4rem);
+                flex-wrap: wrap;
+            }
+            
+            .schedule-content {
+                font-size: clamp(1.1rem, 2vw, 1.6rem);
+                line-height: 1.6;
+                max-height: 70vh;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+            }
+            
+            .day-section {
+                margin-bottom: 15px;
+            }
+            
+            .groups-container {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        /* Очень широкие экраны (2560px+) */
+        @media screen and (min-width: 2560px) {
+            .main-container {
+                max-width: 2400px;
+                grid-template-columns: 1fr 1.5fr;
+                gap: 40px;
+            }
+            
+            .clock-container {
+                font-size: clamp(4rem, 7vw, 10rem);
+            }
+            
+            .date-container {
+                font-size: clamp(1.4rem, 2.8vw, 2.5rem);
+            }
+            
+            .prayer-section h2 {
+                font-size: clamp(1.8rem, 3.5vw, 3rem);
+            }
+            
+            .prayer-item {
+                font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+                padding: 20px;
+            }
+            
+            .schedule-section {
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .schedule-tabs {
+                font-size: clamp(1.2rem, 2vw, 1.6rem);
+                flex-wrap: wrap;
+            }
+            
+            .schedule-content {
+                font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+                line-height: 1.8;
+                max-height: 75vh;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+            }
+            
+            .groups-container {
+                display: grid;
+                gap: 12px;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        /* Сверхширокоформатные экраны (32:9+) */
+        @media screen and (aspect-ratio > 3.5) {
+            body {
+                padding: 10px 20px;
+            }
+            
+            .main-container {
+                max-width: 98vw;
+                grid-template-columns: 1fr 1fr 1.2fr;
+                gap: 20px;
+            }
+            
+            .left-section {
+                min-width: 300px;
+            }
+            
+            .right-section {
+                min-width: 400px;
+            }
+            
+            .schedule-section {
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .fullscreen-btn {
+                top: 15px;
+                right: 15px;
+                font-size: 0.9rem;
+                padding: 10px 14px;
+            }
+            
+            .fullscreen-indicator {
+                top: 15px;
+                left: 15px;
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+        }
+        
+        /* Горизонтальные планшеты и маленькие ultra-wide */
+        @media screen and (aspect-ratio > 2 and aspect-ratio <= 2.5) and (min-width: 1200px) {
+            .main-container {
+                max-width: 90vw;
+                display: grid;
+                grid-template-columns: 1fr 1.1fr;
+                gap: 25px;
+            }
+            
+            .clock-container {
+                font-size: clamp(2.5rem, 5vw, 6rem);
+            }
+            
+            .prayer-item {
+                font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+            }
+            
+            /* Улучшенная адаптация расписания для широких экранов */
+            .schedule-section {
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .schedule-content {
+                max-height: 65vh;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+            }
+            
+            .groups-container {
+                display: grid;
+                gap: 12px;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+        }
+
+        /* ИСПРАВЛЕНИЕ ПОЛНОЭКРАННОГО РЕЖИМА - убираем белый фон */
+        
+        /* Специальные стили для полноэкранного режима */
+        :fullscreen body {
+            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
+            background-attachment: fixed !important;
+        }
+        
+        :fullscreen {
+            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
+        }
+        
+        html:fullscreen {
+            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
+        }
+        
+        /* Fallback для старых браузеров */
+        :-webkit-full-screen body {
+            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
+            background-attachment: fixed !important;
+        }
+        
+        :-moz-full-screen body {
+            background: linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%) !important;
+        }
+        
+        /* Принудительное применение фона ко всем элементам */
+        :fullscreen * {
+            background-color: inherit;
+        }
+        
+        :fullscreen body::before {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 69, 19, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 70%);
+        }
     </style>
 </head>
 <body>
@@ -979,6 +1265,16 @@
         </div>
     </div>
 
+    <!-- Кнопка полноэкранного режима -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">
+        🔲 Полный экран
+    </button>
+    
+    <!-- Индикатор полноэкранного режима -->
+    <div class="fullscreen-indicator hidden" id="fullscreenIndicator">
+        Полноэкранный режим активен
+    </div>
+
     <script>
         // Время намаза
         const prayers = [
@@ -1193,8 +1489,112 @@
             }
         }
 
+        // Полноэкранный режим
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    updateFullscreenIndicator();
+                    // Принудительное применение фона в полноэкранном режиме
+                    document.documentElement.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
+                    document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
+                    document.body.style.backgroundAttachment = 'fixed';
+                }).catch(err => {
+                    console.log('Ошибка входа в полноэкранный режим:', err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    updateFullscreenIndicator();
+                    // Сброс фона при выходе из полноэкранного режима
+                    document.documentElement.style.background = '';
+                    document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
+                    document.body.style.backgroundAttachment = 'fixed';
+                });
+            }
+        }
+
+        function updateFullscreenIndicator() {
+            const indicator = document.getElementById('fullscreenIndicator');
+            const isFullscreen = !!document.fullscreenElement;
+            
+            if (isFullscreen) {
+                indicator.classList.remove('hidden');
+            } else {
+                indicator.classList.add('hidden');
+            }
+        }
+
+        // Автоматический полноэкранный режим через 3 секунды
+        setTimeout(() => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log('Ошибка автоматического полноэкранного режима:', err);
+                });
+            }
+        }, 3000);
+
+        // Предотвращение выхода из полноэкранного режима
+        document.addEventListener('fullscreenchange', () => {
+            updateFullscreenIndicator();
+            
+            // Применяем правильный фон в любом состоянии
+            if (document.fullscreenElement) {
+                // В полноэкранном режиме
+                document.documentElement.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
+                document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
+                document.body.style.backgroundAttachment = 'fixed';
+            } else {
+                // В обычном режиме
+                document.documentElement.style.background = '';
+                document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
+                document.body.style.backgroundAttachment = 'fixed';
+            }
+            
+            // Если пользователь вышел из полноэкранного режима, пытаемся войти снова через 5 секунд
+            if (!document.fullscreenElement) {
+                setTimeout(() => {
+                    if (!document.fullscreenElement) {
+                        toggleFullscreen();
+                    }
+                }, 5000);
+            }
+        });
+
+        // Обработчик клавиатуры для управления
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'Escape':
+                    // Разрешаем выход только при нажатии Escape
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                    break;
+                case 'f':
+                case 'F':
+                    e.preventDefault();
+                    toggleFullscreen();
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    toggleSlideshow();
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    e.preventDefault();
+                    if (e.key === 'ArrowLeft') {
+                        // prevTab();
+                    } else {
+                        // nextTab();
+                    }
+                    break;
+            }
+        });
+
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация правильного фона
+            document.body.style.background = 'linear-gradient(180deg, #000000 0%, #1a0d0d 50%, #0a0a0a 100%)';
+            document.body.style.backgroundAttachment = 'fixed';
+            
             createPrayerCards();
             updateTime();
             updatePrayerTimes();
@@ -1212,8 +1612,9 @@
             // Обновления времени
             setInterval(updateTime, 1000);
             setInterval(updatePrayerTimes, 60000);
+            
+            // Обновляем индикатор полноэкранного режима при загрузке
+            updateFullscreenIndicator();
         });
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"99cf104c3f49b95a","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"e72945439c264b3b85d2e3b689102d27"}' crossorigin="anonymous"></script>
-</body>
-</html>
